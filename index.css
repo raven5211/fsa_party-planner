@@ -1,0 +1,64 @@
+body {
+  font-size: 1.5rem;
+  margin: 2rem;
+}
+
+h1 {
+  justify-self: center;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.partyList {
+  padding-left: 0;
+}
+
+.partyList li {
+  list-style: none;
+  padding: 0.25rem;
+  margin: 0.25rem;
+  border: 1px solid gainsboro;
+  border-radius: 0.25rem;
+}
+
+.partyList li:hover {
+  background-color: #d3d3d3;
+  border: 1px gainsboro solid;
+  cursor: pointer;
+}
+
+.partyList li a {
+  text-decoration: none;
+  color: black;
+}
+
+.selectedParty {
+  background-color: #a9a9a9;
+  font-weight: bold;
+}
+
+.selectedParty:hover {
+  background-color: #a9a9a9;
+  border: 1px solid black;
+}
+
+div div p {
+  font-style: italic;
+}
+
+div p:first-child {
+  margin-bottom: 0;
+}
+
+p + p {
+  margin-top: 0;
+}
