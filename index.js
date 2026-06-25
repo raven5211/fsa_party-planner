@@ -74,8 +74,8 @@ const GUEST_API = BASE + COHORT + GUEST_RESOURCE;
 let parties = [];
 /** @type {Party} */
 let selectedParty;
-/** @type {Guest[]} */
-let guests = [];
+/** @type {Map<number, Guest[]>} */
+let guests = new Map();
 
 /** Updates state with all parties from the API */
 async function getParties() {
@@ -146,7 +146,7 @@ async function getGuests(eventId) {
       const newGuest = await getGuest(rsvp.guestId);
       guestsArr.push(newGuest);
     }
-    guests = guestsArr;
+    guests.set(eventId, guestsArr);
   } catch (error) {
     console.log("Failed to fetch guests:", error);
   }
@@ -190,7 +190,9 @@ function PartyListItem(party) {
     }
     party.selected = true;
     await getParty(party.id);
-    await getGuests(party.id);
+    if (!guests.has(party.id)) {
+      await getGuests(party.id);
+    }
     render();
   });
 
@@ -237,7 +239,8 @@ function GuestList() {
 
   const $ul = document.createElement("ul");
   $ul.classList.add("guests");
-  const liArr = guests.map(GuestListItem);
+  const guestList = guests.get(selectedParty.id);
+  const liArr = guestList.map(GuestListItem);
   $ul.replaceChildren(...liArr);
   return $ul;
 }
